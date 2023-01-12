@@ -1,5 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
+<script>
+  import "../app.postcss";
+  import Header from "./Header.svelte";
+</script>
+
+<Header />
 
 <main>
-    <slot />
+  <slot />
 </main>
