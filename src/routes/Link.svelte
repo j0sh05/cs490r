@@ -1,0 +1,1 @@
+<a class="hover:text-slate-200 active:text-slate-300" href="/Project2">Project 2</a>

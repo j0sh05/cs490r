@@ -17,13 +17,17 @@ export async function load() {
     const data4 = await res4.json();
     const eastern = data4.result;
 
-    const res5 = await fetch("http://localhost:8000/topstudents");
+    const res5 = await fetch("http://localhost:8000/allfemales");
     const data5 = await res5.json();
     const females = data5.result;
 
-    const res6 = await fetch("http://localhost:8000/topstudents");
+    const res6 = await fetch("http://localhost:8000/csmajors");
     const data6 = await res6.json();
     const csmajors = data6.result;
+
+    const res7 = await fetch("http://localhost:8000/usmainland");
+    const data7 = await res7.json();
+    const gringos = data7.result;
 
     return {
         students,
@@ -31,6 +35,7 @@ export async function load() {
         younglings,
         eastern,
         females,
-        csmajors
+        csmajors,
+        gringos
     }
 }

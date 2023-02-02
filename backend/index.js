@@ -26,6 +26,10 @@ const app = express()
 app.use(cors())
 
 // API Requests
+
+/*
+    Project 1
+*/
 app.get('/test', asyncHandler(async (req, res) => {
     console.log("Sending Test Message...")
 
@@ -111,6 +115,75 @@ app.get('/topstudents', asyncHandler(async (req, res) => {
         })
     })
 }))
+
+app.get('/usmainland', asyncHandler(async (req, res) => {
+    let sql = "SELECT * from cis2019 WHERE home='US Mainland'"
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Getting all gringos...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+/*
+    Project 2
+*/
+app.get("/numOfMajors", asyncHandler(async (req, res) => {
+    let sql = 'SELECT major, COUNT(*) from cis2019 Group By major'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('The number of students in each major...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/studentsByHome", asyncHandler(async (req, res) => {
+    let sql = 'SELECT home, COUNT(*) from cis2019 Group By home'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('The number of students from each home...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/avgGPA", asyncHandler(async (req, res) => {
+    let sql = 'SELECT avg(gpa), COUNT(*), major from cis2019 Group By major'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('The avg gpa in each major...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/avgCredits", asyncHandler(async (req, res) => {
+    let sql = 'SELECT avg(credits_attempted), COUNT(*), gradyear from cis2019 Group By gradyear Order by gradyear'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('The avg credits attempted each year...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
 
 // Model for JSON
 app.use(express.json())
