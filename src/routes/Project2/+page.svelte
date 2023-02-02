@@ -1,6 +1,10 @@
 
-<script>
+<script lang="ts">
     /** @type {import('./$types').PageData} */
+    import { Chart, registerables } from 'chart.js';
+    import { onMount } from 'svelte';
+
+    Chart.register(...registerables);
 
     export let data;
     let chartValues = [];
@@ -12,7 +16,8 @@
         console.log(data.numOfMajors[x]);
     }
 
-    console.log(chartLables);
-    
+    const chartData = {
+        // TODO
+    }
 </script>
 
