@@ -133,7 +133,7 @@ app.get('/usmainland', asyncHandler(async (req, res) => {
     Project 2
 */
 app.get("/numOfMajors", asyncHandler(async (req, res) => {
-    let sql = 'SELECT major, COUNT(*) from cis2019 Group By major'
+    let sql = 'SELECT major, COUNT(*) AS numMajors from cis2019 Group By major'
 
     db.query(sql, (err, result) => {
         if (err) throw err
@@ -146,7 +146,7 @@ app.get("/numOfMajors", asyncHandler(async (req, res) => {
 }))
 
 app.get("/studentsByHome", asyncHandler(async (req, res) => {
-    let sql = 'SELECT home, COUNT(*) from cis2019 Group By home'
+    let sql = 'SELECT home, COUNT(*) AS numHome from cis2019 Group By home'
 
     db.query(sql, (err, result) => {
         if (err) throw err
@@ -159,7 +159,7 @@ app.get("/studentsByHome", asyncHandler(async (req, res) => {
 }))
 
 app.get("/avgGPA", asyncHandler(async (req, res) => {
-    let sql = 'SELECT avg(gpa), COUNT(*), major from cis2019 Group By major'
+    let sql = 'SELECT avg(gpa), major from cis2019 Group By major'
 
     db.query(sql, (err, result) => {
         if (err) throw err

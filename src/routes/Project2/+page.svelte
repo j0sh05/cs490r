@@ -1,17 +1,18 @@
+
 <script>
     /** @type {import('./$types').PageData} */
-    import { onMount } from 'svelte';
-    import chartjs from 'chart.js';
 
     export let data;
-    let chartLabels = [];
     let chartValues = [];
+    let chartLables = [];
 
-    console.log(data.numOfMajors);
-    function numberOfMajors() {
-
+    for (let x in data.numOfMajors) {
+        chartValues.push(data.numOfMajors[x].numMajors)
+        chartLables.push(data.numOfMajors[x].major)
+        console.log(data.numOfMajors[x]);
     }
-    
 
+    console.log(chartLables);
+    
 </script>
 
