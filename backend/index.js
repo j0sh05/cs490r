@@ -159,7 +159,7 @@ app.get("/studentsByHome", asyncHandler(async (req, res) => {
 }))
 
 app.get("/avgGPA", asyncHandler(async (req, res) => {
-    let sql = 'SELECT avg(gpa), major from cis2019 Group By major'
+    let sql = 'SELECT avg(gpa) AS gpa, major from cis2019 Group By major'
 
     db.query(sql, (err, result) => {
         if (err) throw err
@@ -172,11 +172,37 @@ app.get("/avgGPA", asyncHandler(async (req, res) => {
 }))
 
 app.get("/avgCredits", asyncHandler(async (req, res) => {
-    let sql = 'SELECT avg(credits_attempted), COUNT(*), gradyear from cis2019 Group By gradyear Order by gradyear'
+    let sql = 'SELECT avg(credits_attempted) AS credits, gradyear from cis2019 Group By gradyear Order by gradyear'
 
     db.query(sql, (err, result) => {
         if (err) throw err
         console.log('The avg credits attempted each year...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/avgPassed", asyncHandler(async (req, res) => {
+    let sql = 'SELECT avg(credits_passed) AS credits, gradyear from cis2019 Group By gradyear Order by gradyear'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('The avg credits passed each year...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/allGPA", asyncHandler(async (req, res) => {
+    let sql = 'SELECT gpa from cis2019 ORDER BY gpa'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('all GPAs...')
         res.status(200).json({
             message: 'Received all Files',
             result
