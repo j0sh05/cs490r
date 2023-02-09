@@ -4,10 +4,10 @@ const dotenv = require('dotenv').config()
 const port = process.env.PORT || 8932
 const asyncHandler = require('express-async-handler')
 const cors = require('cors')
-
+// const project3Router = require('./routes/project3')
 
 // Connecting to Database
-var db = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'localhost',
     user: process.env.SQL_USER, 
     password: process.env.SQL_PASSWORD,
@@ -210,9 +210,56 @@ app.get("/allGPA", asyncHandler(async (req, res) => {
     })
 }))
 
+/*
+    Project 3
+*/
+
+app.get("/allAttemptedCredits", asyncHandler(async (req, res) => {
+    let sql = 'SELECT credits_attempted AS data from cis2019'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending all credits attempted...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/allPassedCredits", asyncHandler(async (req, res) => {
+    let sql = 'SELECT credits_passed AS data from cis2019'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending all credits passed...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get("/gpa", asyncHandler(async (req, res) => {
+    let sql = 'SELECT gpa AS data from cis2019 ORDER BY gpa'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending all gpa...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
 
 // Model for JSON
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.listen(port, () => console.log(`Svelte Server started on Port ${port} in ${process.env.NODE_ENV} mode!`))
+
+module.exports = {
+    db
+}
