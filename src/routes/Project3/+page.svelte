@@ -18,16 +18,15 @@
     }
 
     async function scatterPlotFunction(link1: string, link2: string, title: string) {
-        const link0: string = "http://localhost:8000/";
-
+        
         scatterplotData.length = 0;
         myChart.destroy();
 
-        const res = await fetch(link0 + link1);
+        const res = await fetch("http://localhost:8000/" + link1);
         const data = await res.json();
         const dataSet1 = data.result;
 
-        const res2 = await fetch(link0 + link2);
+        const res2 = await fetch("http://localhost:8000/" + link2);
         const data2 = await res2.json();
         const dataSet2 = data2.result;
 
@@ -61,7 +60,7 @@
                         display: true,
                         text: chartTitle
                     }
-                },
+                }
             },
             scales: {
                 x: {
@@ -78,7 +77,6 @@
                         text: YChartTitle
                     }
                 }
-                
             }
         }
         })
@@ -88,8 +86,6 @@
 
     onMount(createNewChart)
 </script>
-
-<h1>Project 3</h1>
 
 <button on:click={() => scatterPlotFunction("allAttemptedCredits", "allPassedCredits", "Attempted Credits VS Passed Credits")}>
     Attempted Credits VS Passed Credits
@@ -103,6 +99,15 @@
     Passed Credits VS GPA
 </button>
 |
+<button on:click={() => scatterPlotFunction("age", "gpa", "Age VS GPA")}>
+    Age VS GPA
+</button>
+|
+<button on:click={() => scatterPlotFunction("age", "allPassedCredits", "Passed Credits VS GPA")}>
+    Age VS Passed Credits
+</button>
+
+
 
 <section class="flex justify-center items-center w-2/3 h-2/3">
     <canvas bind:this={barChartElement} />

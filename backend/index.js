@@ -4,7 +4,7 @@ const dotenv = require('dotenv').config()
 const port = process.env.PORT || 8932
 const asyncHandler = require('express-async-handler')
 const cors = require('cors')
-// const project3Router = require('./routes/project3')
+
 
 // Connecting to Database
 const db = mysql.createConnection({
@@ -215,7 +215,7 @@ app.get("/allGPA", asyncHandler(async (req, res) => {
 */
 
 app.get("/allAttemptedCredits", asyncHandler(async (req, res) => {
-    let sql = 'SELECT credits_attempted AS data from cis2019'
+    let sql = 'SELECT credits_attempted AS data from cis2012'
 
     db.query(sql, (err, result) => {
         if (err) throw err
@@ -228,7 +228,7 @@ app.get("/allAttemptedCredits", asyncHandler(async (req, res) => {
 }))
 
 app.get("/allPassedCredits", asyncHandler(async (req, res) => {
-    let sql = 'SELECT credits_passed AS data from cis2019'
+    let sql = 'SELECT credits_passed AS data from cis2012'
 
     db.query(sql, (err, result) => {
         if (err) throw err
@@ -241,7 +241,7 @@ app.get("/allPassedCredits", asyncHandler(async (req, res) => {
 }))
 
 app.get("/gpa", asyncHandler(async (req, res) => {
-    let sql = 'SELECT gpa AS data from cis2019 ORDER BY gpa'
+    let sql = 'SELECT GPA AS data from cis2012'
 
     db.query(sql, (err, result) => {
         if (err) throw err
@@ -253,13 +253,21 @@ app.get("/gpa", asyncHandler(async (req, res) => {
     })
 }))
 
+app.get("/age", asyncHandler(async (req, res) => {
+    let sql = 'SELECT age AS data from cis2012'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending all ages...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
 
 // Model for JSON
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.listen(port, () => console.log(`Svelte Server started on Port ${port} in ${process.env.NODE_ENV} mode!`))
-
-module.exports = {
-    db
-}
