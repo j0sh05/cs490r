@@ -30,13 +30,6 @@ app.use(cors())
 /*
     Project 1
 */
-app.get('/test', asyncHandler(async (req, res) => {
-    console.log("Sending Test Message...")
-
-    res.status(200).json({
-        message: 'Connection Successful'
-    })
-}))
 
 app.get('/allfiles', asyncHandler(async (req, res) => {
     let sql = 'SELECT * from cis2019'
@@ -259,6 +252,36 @@ app.get("/age", asyncHandler(async (req, res) => {
     db.query(sql, (err, result) => {
         if (err) throw err
         console.log('Sending all ages...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+/*
+    Project 4
+*/
+
+app.get('/getDatabase2019', asyncHandler(async (req, res) => {
+    let sql = 'SELECT * from cis2019'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending 2019...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get('/getDatabase2012', asyncHandler(async (req, res) => {
+    let sql = 'SELECT * from cis2012'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending 2012...')
         res.status(200).json({
             message: 'Received all Files',
             result
