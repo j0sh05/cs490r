@@ -263,7 +263,7 @@ app.get("/age", asyncHandler(async (req, res) => {
     Project 4
 */
 
-app.get('/getDatabase2019', asyncHandler(async (req, res) => {
+app.get('/2019', asyncHandler(async (req, res) => {
     let sql = 'SELECT * from cis2019'
 
     db.query(sql, (err, result) => {
@@ -276,12 +276,25 @@ app.get('/getDatabase2019', asyncHandler(async (req, res) => {
     })
 }))
 
-app.get('/getDatabase2012', asyncHandler(async (req, res) => {
+app.get('/2012', asyncHandler(async (req, res) => {
     let sql = 'SELECT * from cis2012'
 
     db.query(sql, (err, result) => {
         if (err) throw err
         console.log('Sending 2012...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
+app.get('/p4Testing', asyncHandler(async (req, res) => {
+    let sql = 'SELECT DISTINCT home from cis2019'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending ...')
         res.status(200).json({
             message: 'Received all Files',
             result
