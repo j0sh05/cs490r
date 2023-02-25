@@ -289,18 +289,20 @@ app.get('/2012', asyncHandler(async (req, res) => {
     })
 }))
 
-app.get('/p4Testing', asyncHandler(async (req, res) => {
-    let sql = 'SELECT DISTINCT home from cis2019'
+app.get('/marathon', asyncHandler(async (req, res) => {
+    let sql = 'SELECT * from marathon'
 
     db.query(sql, (err, result) => {
         if (err) throw err
-        console.log('Sending ...')
+        console.log('Sending marathon...')
         res.status(200).json({
             message: 'Received all Files',
             result
         })
     })
 }))
+
+
 
 // Model for JSON
 app.use(express.json())

@@ -2,7 +2,6 @@
     import { Chart } from 'chart.js';
     import { ParallelCoordinatesController, LinearAxis, LineSegment, PCPScale } from 'chartjs-chart-pcp';
     import { onMount } from 'svelte'
-    import { each } from 'svelte/internal';
 
     Chart.register(ParallelCoordinatesController, PCPScale, LineSegment);
     Chart.registry.addElements(LinearAxis);
@@ -29,21 +28,21 @@
                 case "gender":
                     myDataSets.push({
                         label: "gender",
-                        id: "gender",
+                        yAxisID: "gender",
                         data: myData.map((obj) => obj["gender"])
                     })
                     break
                 case "major":
                     myDataSets.push({
                         label: "major",
-                        id: "major",
+                        yAxisID: "major",
                         data: myData.map((obj) => obj["major"])
                     })
                     break
                 case "home":
                     myDataSets.push({
                         label: "home",
-                        id: "home",
+                        yAxisID: "home",
                         data: myData.map((obj) => obj["home"])
                     })
                     break
@@ -55,7 +54,7 @@
             }
         }
 
-        if (link == "2012") {
+        if (link == "2012" || link == 'marathon') {
             myScales = {
                 gender: {
                     type: "category",
@@ -105,6 +104,8 @@
 <button on:click={() => getMyData("2012")}>2012</button>
 |
 <button on:click={() => getMyData("2019")}>2019</button>
+|
+<!-- <button on:click={() => getMyData("marathon")}>Marathon - WARNING: CPU will die!!</button> -->
 
 
 <section class="flex justify-center items-center w-2/3 h-2/3">
