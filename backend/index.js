@@ -302,6 +302,19 @@ app.get('/marathon', asyncHandler(async (req, res) => {
     })
 }))
 
+app.get('/test', asyncHandler(async (req, res) => {
+    let sql = 'SELECT DISTINCT agegroup from cis2019'
+
+    db.query(sql, (err, result) => {
+        if (err) throw err
+        console.log('Sending test data...')
+        res.status(200).json({
+            message: 'Received all Files',
+            result
+        })
+    })
+}))
+
 
 
 // Model for JSON
